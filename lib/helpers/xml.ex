@@ -28,7 +28,11 @@ defmodule ElixirRss.Helpers.Xml do
   def parse_date(_, _), do: nil
 
   def strip(text) when is_binary(text) do
-    text |> String.replace("\r", " ") |> String.replace("\n", " ") |> String.trim()
+    text
+    #  |> String.replace("\r", " ") |> String.replace("\n", "
+
+
+    # ") |> String.trim()
   end
 
   def strip(_), do: ""

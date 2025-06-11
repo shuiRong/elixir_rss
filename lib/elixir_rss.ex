@@ -64,8 +64,7 @@ defmodule ElixirRss do
       entries =
         feed.entries
         |> Enum.filter(fn e -> e.title && e.content end)
-        |> Enum.sort(&(DateTime.compare(&1[:updated], &2[:updated]) != :gt))
-        |> Enum.map(&sanitize_entry(&1))
+        |> Enum.sort(&(DateTime.compare(&1[:updated], &2[:updated]) != :lt))
 
       {:ok, %{feed | entries: entries}}
     end
@@ -127,13 +126,5 @@ defmodule ElixirRss do
       RSS2.valid?(doc) -> {:ok, RSS2}
       true -> {:error, :unknown_feed_format}
     end
-  end
-
-  defp sanitize_entry(entry) do
-    content =
-      (entry.content || "")
-      |> Sanitizer.basic_html()
-
-    %{entry | content: content}
   end
 end
