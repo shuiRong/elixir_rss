@@ -144,8 +144,6 @@ defmodule ElixirRss.Parsers.RSS2 do
   end
 
   defp get_entry_image(entry) do
-    IO.inspect(entry)
-
     cond do
       "" != entry.image_thumbnail -> entry.image_thumbnail
       "" != entry.image_content -> entry.image_content
